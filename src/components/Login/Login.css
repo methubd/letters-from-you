@@ -1,0 +1,19 @@
+.login-box{
+    background-color: rgb(231, 231, 231);
+    text-align: center;
+    padding: 5rem;
+    margin: auto;
+}
+
+.login-box input{
+    border: none;
+    outline: none;
+    padding: 5px 10px ; 
+    margin: 5px 2px;
+    font-size: 18px;
+    border-radius: 8px;
+}
+
+#login-instructions{
+    margin-top: 2rem;
+}
