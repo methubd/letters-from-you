@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { btnLogin } from '../Root/auth';
 import './Login.css'
+import toast, { Toaster } from 'react-hot-toast';
+
 
 const Login = () => {
     const [users, setUsers] = useState([]);
@@ -11,44 +12,47 @@ const Login = () => {
         .then(data => setUsers(data))
     }, [])
 
-    const btnLogin = data => {
+    const btnNotification = () => {
+        toast.error('Something Wrong, Please Check', {
+            duration: 1000
+        })
+    }
+
+    const btnLogin = () => {        
         const userNameField = document.getElementById('input-user-name');
         const passwordField = document.getElementById('input-user-password');
-        const loginInstructions = document.getElementById('login-instructions');
-        loginInstructions.innerText = '';
+
         const userName = userNameField.value;
         const password = passwordField.value;
+
         userNameField.value = '';
         passwordField.value = '';
-
-        if(isNaN(userName) && userName === 'number' && password === 'string'){
-            loginInstructions.innerText = 'Please check your entry';
-            return;
-        }
+        
         
         // console.log(users);
         for (const user of users){
             if(user.userName === userName && user.password === password){
-                console.log('Data Matched');
                 window.location.pathname = '/upload';
-                loginInstructions.style.color = 'green';
-                loginInstructions.innerText = 'Correct Information';
+                toast.success('Correct Information')
             }
             else{
-                loginInstructions.innerText = 'Something is wrong'
-                loginInstructions.style.color = 'red';
+                toast.error('Something Wrong, Please Check', {
+                    duration: 1000
+                })
             }
         }
     }
     
     return (
         <div>
+      
             <div className="login-box">
                 <input id='input-user-name' type="text" placeholder='Given UserName' /> <br />
                 <input id='input-user-password' type="password" placeholder='Password' /> <br />
-                <button className='btn-login' onClick={() => btnLogin()}>Login</button>
-                <p id='login-instructions'>Welcome to <span className='brand-title'>Letters From You</span></p>
+                <button className='btn-login' onClick={() => btnLogin()}>Login</button>                
+                <Toaster />
             </div>
+            
         </div>
     );
 };

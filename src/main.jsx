@@ -13,6 +13,8 @@ import Home from './components/Home/Home';
 import Error from './components/Error/Error';
 import Login from './components/Login/Login';
 import UploadDocument from './components/UploadDocument/UploadDocument';
+import Pricing from './components/Pricing/Pricing';
+
 
 const router = createBrowserRouter([
   {
@@ -31,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: '/company',
         element: <Company></Company>
+      },
+      {
+        path: '/pricing',
+        element: <Pricing></Pricing>
       },
       {
         path: '/login',

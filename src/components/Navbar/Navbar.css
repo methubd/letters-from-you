@@ -7,6 +7,7 @@
     --primary-hover-color: rgb(216, 216, 216);
     --primary-line-color: rgb(0, 118, 214);
     --secondary-color: rgb(117, 117, 117);
+    --primary-width: 1000px;
     font-family: 'EB Garamond', serif;
     font-family: 'Exo 2', sans-serif;
 }
@@ -28,7 +29,7 @@
 }
 
 nav{
-    margin-left: 1rem;
+    /* margin-left: 1rem; */
 }
 
 .brand-title{
@@ -39,19 +40,29 @@ nav{
 
 .header-section {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     margin: auto;
-    width: 1280px;
-    padding-top: 12px;
+    width: var(--primary-width);
+    padding: 14px;
 }
 
 .title-section{
     display: flex;
-    align-items: center;
+    align-items: center;  
+    
 }
 
 /* Header Menu */
+
+nav ul li{
+    list-style: none;
+    
+}
+nav ul{
+    display: flex;
+    
+}
 
 .header-container nav .menu {
     /* margin-left: 20px; */
@@ -75,6 +86,7 @@ nav{
     border-radius: 8px;
     color: white;
     transition: 0.5s;
+    margin-right: 2rem;
 }
 
 .btn-login:hover{
@@ -87,7 +99,7 @@ nav{
 }
 
 .mobile-screen-menu{
-    display: none;
+    display: block;
 }
 
 /* Logo RMM Real Mail */
@@ -95,9 +107,22 @@ nav{
     width: 210px;
 }
 
+/* Toogle Menu Icon */
+
+.toogle-menu-container{
+    display: none;
+
+}
+.menu-icon{
+    width: 50px;
+    padding: 3px;
+    margin: 0 25px;
+}
+
 @media screen and (max-width: 576px) {
     .header-section{
         width: 100%;
+        padding-top: 1px;
     }
     .menu{
         /* display: none; */
@@ -106,7 +131,44 @@ nav{
         display: block;
     }
     .company-name{
-        font-size: 12px;
+        font-size: 22px;
+    }
+
+    nav{
+        position: absolute;
+        top: 4rem;
+        left: 0px;
+        background-color: var(--primary-color);
+        color: white;
+        margin-left: -2.5rem;
+        height: fit-content;
+        transition: 0.5s;
+    }
+
+    nav ul li{
+        padding: 20px 20px;
+        
+    }
+    .header-container nav .menu {
+        /* margin-left: 20px; */
+        text-decoration: none;
+        color: black;
+        padding: 15px 25px;
+    }
+
+    .toogle-menu-container{
+        display: block;
+    }
+/* Menu Toogle Class */
+
+    .show-menu{
+        display: block;
+    }
+    
+    .hide-menu{
+        display: none;
     }
     
 }
+
+
