@@ -1,56 +1,51 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './Login.css'
 import toast, { Toaster } from 'react-hot-toast';
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../AuthProvider/AuthProvider';
 
 
 const Login = () => {
-    const [users, setUsers] = useState([]);
+    const {logIn, setUser, user, googleLogin} = useContext(AuthContext);
+    const navigator = useNavigate();
 
-    useEffect(() => {
-        fetch('touching.json')
-        .then(res => res.json())
-        .then(data => setUsers(data))
-    }, [])
+    const handleLogin = e => {
+        e.preventDefault();
+        const form = e.target;
+        const email = form.email.value; 
+        const password = form.password.value; 
 
-    const btnNotification = () => {
-        toast.error('Something Wrong, Please Check', {
-            duration: 1000
+        logIn(email, password)
+        .then(result => {
+            const loggedUser = result.user;
+            setUser(loggedUser);
+            form.reset();
+            navigator('/');
+        })
+        .catch(error => {
+            
         })
     }
 
-    const btnLogin = () => {        
-        const userNameField = document.getElementById('input-user-name');
-        const passwordField = document.getElementById('input-user-password');
-
-        const userName = userNameField.value;
-        const password = passwordField.value;
-
-        userNameField.value = '';
-        passwordField.value = '';
-        
-        
-        // console.log(users);
-        for (const user of users){
-            if(user.userName === userName && user.password === password){
-                window.location.pathname = '/upload';
-                toast.success('Correct Information')
-            }
-            else{
-                toast.error('Something Wrong, Please Check', {
-                    duration: 1000
-                })
-            }
-        }
+    const handleGoogleLogin = () => {
+        googleLogin()
+        .then(result => {
+            navigator('/')
+        })
     }
-    
     return (
         <div>
       
             <div className="login-box">
-                <input id='input-user-name' type="text" placeholder='Given UserName' /> <br />
-                <input id='input-user-password' type="password" placeholder='Password' /> <br />
-                <button className='btn-login' onClick={() => btnLogin()}>Login</button>                
+                <h2>Please Login</h2>
+                <form onSubmit={handleLogin}>
+                    <input name='email' id='input-user-name' type="text" placeholder='User Email' /> <br />
+                    <input name='password' id='input-user-password' type="password" placeholder='Password' /> <br />
+                    <input className='btn-login' type="submit" value="Login" name="" id="" />
+                </form>           
                 <Toaster />
+            <p>Forget Password <Link>Reset Now</Link> </p>
+            <button onClick={handleGoogleLogin} className='btn-google'>Login with Google</button>
             </div>
             
         </div>

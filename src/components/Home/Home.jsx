@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './Home.css'
 import '../Navbar/Navbar.css'
-import { useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 import Feature from '../Feature/Feature';
+import { AuthContext } from '../../AuthProvider/AuthProvider';
 
 const Home = () => {
+    const {user} = useContext(AuthContext);
     const features = useLoaderData();
     // console.log(features);
     return (
@@ -12,7 +14,11 @@ const Home = () => {
             <section className='banner-section'>
                 <div className="banner-image">
                     <h1>Let <span className='brand-title'>“Letter’s From You”</span> <br /> send your company’s <br /> next round of disputes. <br />
-                    <button className='btn-login'>Create a new Account</button>
+                    { user ? "" :
+                        <Link to='/registration'>
+                        <button className='btn-login'>Create a new Account</button>
+                        </Link>
+                    }
                     </h1>
                     
                 </div>

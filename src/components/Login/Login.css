@@ -5,6 +5,10 @@
     margin: auto;
 }
 
+.login-box h2{
+    padding: 20px;
+}
+
 .login-box input{
     border: none;
     outline: none;
@@ -16,4 +20,14 @@
 
 #login-instructions{
     margin-top: 2rem;
+}
+
+.btn-google{
+    margin: 15px;
+    padding: 8px;
+    background-color: rgb(236, 71, 11);
+    border: none;
+    color: aliceblue;
+    cursor: pointer;
+    border-radius: 5px;
 }

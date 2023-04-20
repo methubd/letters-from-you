@@ -14,6 +14,10 @@ import Error from './components/Error/Error';
 import Login from './components/Login/Login';
 import UploadDocument from './components/UploadDocument/UploadDocument';
 import Pricing from './components/Pricing/Pricing';
+import GetEmail from './components/GetEmail/GetEmail';
+import AuthProvider from './AuthProvider/AuthProvider';
+import Registration from './components/Registration/Registration';
+import PrivateRoute from './PrivateRoute/PrivateRoute';
 
 
 const router = createBrowserRouter([
@@ -44,7 +48,15 @@ const router = createBrowserRouter([
       },
       {
         path: '/upload',
-        element: <UploadDocument></UploadDocument>
+        element: <PrivateRoute><UploadDocument></UploadDocument></PrivateRoute>
+      },
+      {
+        path: '/get-email',
+        element: <GetEmail></GetEmail>
+      },
+      {
+        path: '/registration',
+        element: <Registration></Registration>
       }
       
     ]
@@ -58,6 +70,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router}></RouterProvider>
+    <AuthProvider>
+      <RouterProvider router={router}></RouterProvider>
+    </AuthProvider>
   </React.StrictMode>,
 )

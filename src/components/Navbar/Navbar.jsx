@@ -1,14 +1,19 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./Navbar.css";
 import { Link } from "react-router-dom";
 import { Bars3Icon, BeakerIcon, XMarkIcon } from "@heroicons/react/24/solid";
+import { AuthContext } from "../../AuthProvider/AuthProvider";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const {user, logOut} = useContext(AuthContext);
+  
+  const handleLogOut = () => {
+    logOut()
+  }
 
   return (
     <div className="header-container">
-
       <section className="header-section">
 {/* Mobile Screen Toogle Menu */}
         <div className="title-section">
@@ -36,16 +41,20 @@ const Navbar = () => {
                     {/* <li><Link className="menu" to="/about">About</Link></li> */}
                 </ul>
             </nav>
-        </div>
+        </div> 
 
-        
+        { user &&
+          <p>Welcome: {user.email}</p>
+        }
 
-        <div>
-          <button className="btn-login">
-            <Link className="menu" to="/login">
-              Login
-            </Link>
-          </button>
+        <div>          
+          { user ? 
+            <div>
+            <button className="btn-login"><Link to='/upload' className="menu">Upload Document</Link></button>
+            <button onClick={handleLogOut} className="btn-login btn-logout"><Link className="menu">Logout</Link></button>
+            </div> :
+            <button className="btn-login"><Link className="menu" to="/login">Upload Document</Link></button>
+          }
         </div>
       </section>
       <section className="mobile-screen-menu">

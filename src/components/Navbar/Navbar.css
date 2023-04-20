@@ -98,6 +98,10 @@ nav ul{
     color: white;
 }
 
+.btn-logout{
+    background-color: red;
+}
+
 .mobile-screen-menu{
     display: block;
 }

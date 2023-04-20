@@ -5,7 +5,6 @@ import toast, { Toaster } from 'react-hot-toast';
 const UploadDocument = () => {
     
     const showAMsg = () => {
-
         toast.error('Thank you for your click, we re still working on it.')
     }
 
